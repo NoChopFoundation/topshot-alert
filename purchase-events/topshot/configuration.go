@@ -55,7 +55,7 @@ func Configuration_ConnectionError() (*Configuration, error) {
 
 // If DB_CONNECTION is set, we assume it is from local dev environment, like "root:***@tcp(127.0.0.1:3306)/testdb"
 // If INSTANCE_CONNECTION_NAME is set, then we assume its gcloud which also sets
-//   DB_USER, DB_PASS, DB_NAME where INSTANCE_CONNECTION_NAME like primeval-pen-307423:us-central1:topshot2
+//   DB_USER, DB_PASS, DB_NAME where INSTANCE_CONNECTION_NAME like prim*******:us-central1:topshot2
 func getMySqlConnectionStr() (string, error) {
 	dbConnectionStr := os.Getenv("DB_CONNECTION")
 	if len(dbConnectionStr) == 0 {
