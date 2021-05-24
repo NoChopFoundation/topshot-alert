@@ -1,0 +1,17 @@
+
+<div><span></span></div>
+
+<div><button (click)="onDelete()" >Delete</button></div>
+<div><button (click)="onSave()" >Save</button></div>
+
+<ngx-codemirror
+  [(ngModel)]="content"
+  [options]="{
+    lineNumbers: false,
+    theme: 'material',
+    mode: {
+      name: 'javascript',
+      json: false
+    }
+  }"
+></ngx-codemirror>

@@ -1,0 +1,21 @@
+
+<div class="content" role="main">
+  <span>TopShot Monitor Unique
+    Plays({{ plays ? plays.length : "..." }})
+    Sets({{ sets ? sets.length : "..." }})
+  </span>
+</div>
+
+<app-collector-status-detector></app-collector-status-detector>
+<hr/>
+<app-player-lookup
+    (selectionEvent)="monitor.onPlayerLookupPlaySetSelectedEvent($event)"
+    [plays]="plays!"
+    [sets]="sets!">
+  </app-player-lookup>
+<hr/>
+<app-player-monitor #monitor></app-player-monitor>
+<hr/>
+<app-table-log></app-table-log>
+
+<router-outlet></router-outlet>

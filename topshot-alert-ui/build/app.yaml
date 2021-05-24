@@ -1,0 +1,9 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+handlers:
+- url: /
+  static_files: topshot-alert/index.html
+  upload: topshot-alert/index.html
+- url: /
+  static_dir: topshot-alert

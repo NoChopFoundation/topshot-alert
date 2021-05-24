@@ -1,0 +1,34 @@
+<div [hidden]="DisplayPlays.length == 0">
+  <ng-template ngFor let-item [ngForOf]="DisplayPlays" let-i="index">
+    <div>
+      <div *ngIf="item._resultList?.visable">
+        <hr/>
+      </div>
+      <div>
+        <span>
+          {{ item.FullName }}[{{ item.PlayId }}]
+          - {{ item.PlayType }} - {{ item.TeamAtMoment }}
+        </span>
+        <ng-container *ngFor="let set of item.Sets; let setIdx = index;  last as isLast">
+          <a href="?addPlayerSet"
+            (click)="$event.preventDefault(); previewSetId(item.PlayId, set);" >
+            {{ GetSetNameWithEditionInfo(item, setIdx) }}
+          </a>
+          <span *ngIf="!isLast"> / </span>
+        </ng-container>
+      </div>
+      <div *ngIf="item._resultList?.visable">
+        <div><span>Set Name: </span><span>{{ item._resultList!.set.Name }}</span></div>
+        <div><a href="{{ getRawLinkPlaySet(item.PlayId, item._resultList!.set.SetId) }}"  target="_blank" rel="noopener noreferrer">Recent Raw Data</a></div>
+        <div>
+          <button
+            [hidden]="!item._resultList!.enabledAddToMonitoring"
+            (click)="addToMonitoring(item.PlayId, item._resultList!.set.SetId, item._resultList!)">Add to Monitoring</button>
+        </div>
+        <app-quick-graph [playId]="item.PlayId" [setId]="item._resultList!.set.SetId">
+        </app-quick-graph>
+        <hr/>
+      </div>
+    </div>
+  </ng-template>
+</div>

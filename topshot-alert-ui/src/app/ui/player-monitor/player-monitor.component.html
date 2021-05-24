@@ -1,0 +1,35 @@
+<div *ngIf="!IsLoading">
+  <button (click)="onTopButtonClicked()">
+    {{ IsMinimized ?
+      ( (liveFeedSubscription ? "" : "NOT ") + "Monitoring(" + model.eventMonitoring.length + ")" ) :
+      ("Minimize Monitoring")
+    }}</button>
+    <hr/>
+
+    <div [hidden]="IsMinimized">
+      <div [hidden]="!!liveFeedSubscription">
+        Monitoring has been paused, {{ liveFeedSubscriptionMsg }} <button (click)="onReStartMonitor()" >Enable</button>
+      </div>
+      <button (click)="copyModelToClipboard()" value="click to save model to clipboard" >Export Monitoring Model to Clipboard</button>
+      <button (click)="IsImportMinimized = !IsImportMinimized"  [hidden]="!IsImportMinimized">Import Monitoring Model from File</button>
+      <div [hidden]="IsImportMinimized" class="Block">
+        <label>Choose File to Import </label>
+        <input type='file' (change)="fileChanged($event)">
+      </div>
+      <hr/>
+
+      <ng-container *ngFor="let item of model.eventMonitoring; last as isLast">
+        <app-player-monitor-item
+          [CompleteSets]="sets"
+          (saveEvent)="onSave($event)"
+          (deletionEvent)="onDelete($event)"
+          [set]="findSetFromModel(item)"
+          [play]="findPlayFromModel(item)"
+          [model]="item">
+        </app-player-monitor-item>
+        <hr *ngIf="!isLast"/>
+      </ng-container>
+      <button [hidden]="model.eventMonitoring.length < 5" (click)="onDeleteAll()">Delete All Monitored</button>
+      <button [hidden]="!liveFeedSubscription" (click)="onUserInitiatePause()">Pause Monitoring</button>
+    </div>
+</div>

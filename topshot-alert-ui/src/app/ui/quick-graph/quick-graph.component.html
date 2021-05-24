@@ -1,0 +1,19 @@
+<div [hidden]="!isLoading">
+  <span>Loading....</span>
+</div>
+<div [hidden]="isLoading">
+  <div [hidden]="isGraphable">
+    <span>No recent purchase data available, choose another set.</span>
+  </div>
+  <div *ngIf="isGraphable">
+    <google-chart #chart
+      [data]="data"
+      [columns]="columns"
+      [type]="type"
+      [options]="options"
+      [width]="width"
+      [height]="height">
+    </google-chart>
+    <span>{{ serialNumberGuid }}</span>
+  </div>
+</div>
