@@ -1,0 +1,4 @@
+<button (click)="clearLog()" >Clear Log</button>
+<ng-container *ngFor="let item of logEntries; last as isLast">
+  <pre>{{ item.LogLevel }} - {{ item.Comment }} - {{ stringify(item) }}</pre>
+</ng-container>

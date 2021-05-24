@@ -1,0 +1,17 @@
+<div>
+  <a href="?expandArea" (click)="$event.preventDefault(); IsMinimized = !IsMinimized" >{{ play.FullName }} -- {{ GetSetNameWithEditionInfo_ViaSetId(play, set.SetId) }}</a>
+</div>
+<div [hidden]="IsMinimized">
+  <div>{{play.PlayType}} - {{ play.TeamAtMoment }} - SetId[{{ set.SetId }}]
+    {{ play.NbaSeason }} - Jersey[{{ play.JerseyNumber }}] - {{ play.PlayCategory }} - {{ play.PlayerPosition }} -
+    {{ play.DateOfMoment }} - PlayId[{{ play.PlayId }}]
+  </div>
+  <div>
+    <app-player-monitor-item-editor
+      [CompleteSets]="CompleteSets"
+      (saveEvent)="onSave()"
+      (deletionEvent)="onDelete()"
+      [model]="model" >
+    </app-player-monitor-item-editor>
+  </div>
+</div>

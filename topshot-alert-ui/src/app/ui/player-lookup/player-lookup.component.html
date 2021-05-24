@@ -1,0 +1,17 @@
+
+<div [hidden]="isLoading()">
+  <button (click)="IsMinimized = !IsMinimized">{{ IsMinimized ? "Find Player" : "Minimize - Find Player" }}</button>
+
+  <div [hidden]="IsMinimized">
+    <div><span>Enter Player  Name</span></div>
+
+    <input size="40" type="text" #PlayerNameInput class="form-control"  (input)="onPlayerNameInput(PlayerNameInput.value)" />
+    <app-player-lookup-result-list
+        (selectionEvent)="onPlayerLookupPlaySetSelectedEvent($event)"
+        [DisplayPlays]="DisplayPlays"
+        [CompleteSets]="sets!">
+    </app-player-lookup-result-list>
+
+  </div>
+
+</div>

@@ -1,0 +1,93 @@
+<div>
+
+  <!-- class="mat-elevation-z8"-->
+  <div><span>Events Processed({{ eventsProcessedCount }})</span> -
+    <button (click)="isAppendsFrozen = !isAppendsFrozen">
+      {{ isAppendsFrozen ? ("UnFreeze Table deferred(" + frozenDeferals.length + ")") : ("Freeze Table") }}
+    </button>
+    -
+    <button (click)="clearLog()">Clear Logs</button>
+  </div>
+  <table mat-table matSort [dataSource]="dataSource">
+
+    <ng-container matColumnDef="Type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>T</th>
+      <td mat-cell *matCellDef="let e"> {{ e.ConsiderEvent.Event.Type }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Moment</th>
+      <td mat-cell *matCellDef="let e"> {{ e.play ?
+        ( e.play.FullName + "/" + e.play.PlayType )
+        : "N/A"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="SetName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Set</th>
+      <td mat-cell *matCellDef="let e"> {{ e.SetDesc }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="SerialNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial </th>
+      <td mat-cell *matCellDef="let e"> {{ e.SerialNumber }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+      <td mat-cell *matCellDef="let e"> {{ e.Price }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="LogLevel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Level</th>
+      <td mat-cell *matCellDef="let e"> {{ e.LogLevel }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="DateAsLong">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let e"> {{ e.DateDisplay }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="notes">
+      <th mat-header-cell *matHeaderCellDef>Notes</th>
+      <td mat-cell *matCellDef="let e"> {{ e.ConsiderEvent.Comment }} </td>
+    </ng-container>
+
+<!--
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+-->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>
+
+</div>
